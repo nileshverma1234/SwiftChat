@@ -30,8 +30,8 @@ const signupUser =async (req,res)=>{
         const salt= await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password,salt);
 
-        const boypic=`https://avatar.iran.liara.run/public/boy?username=${fullname}`;
-        const girlpic=`https://avatar.iran.liara.run/public/girl?username=${fullname}`;
+        const boypic=`https://avatar.iran.liara.run/public/boy?username=${fullname.trim().replace(' ',"%20")}`;
+        const girlpic=`https://avatar.iran.liara.run/public/girl?username=${fullname.trim().replace(' ',"%20")}`;
 
         if(profilePic===''){
             if(gender === 'male'){
@@ -76,8 +76,38 @@ const signupUser =async (req,res)=>{
 
 
 const loginUser = async (req,res)=>{
-    const {value, password}= req.body;
-    return res.status(201).json(req.body);
+    try {
+        const {value, password}= req.body;
+        if(!value || !password){
+            return res.status(400).json({error:"Please provide all values"});
+        }
+        const email = await User.findOne({email:value});
+        const uname = await User.findOne({userName:value});
+        if (email || uname) {
+            const user = email === null ? uname : email;
+            const isPasswordCorrect = await bcrypt.compare(password, user.password);
+            if(!isPasswordCorrect){
+                return res.status(400).json({error:"Invalid Password"});
+            }
+            genAndSetToken(user._id,res);
+
+            
+            return res.status(201).json({
+                _id:user._id,
+                fullName:user.fullName,
+                userName:user.userName,
+                email:user.email,
+                profilePic:user.profilepic
+            });
+        } 
+        
+        return res.status(400).json({error:`user with ${value} not found`});
+        
+    } catch (err) {
+        return res.status(401).json({error:err.message});
+    }
+    
+    
 }
 
 const logoutUser = (req,res)=>{
