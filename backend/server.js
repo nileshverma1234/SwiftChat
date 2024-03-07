@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 app.use('/api/auth',authRoutes);
 app.use('/api/messages',messageRoutes);
+
 // app.get('/', (req,res)=>{
 //     res.send({message: "Server is running fine"});
 // });
