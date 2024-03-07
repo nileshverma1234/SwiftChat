@@ -111,6 +111,12 @@ const loginUser = async (req,res)=>{
 }
 
 const logoutUser = (req,res)=>{
+    try {
+        res.cookie("jwt","",{maxAge:0});
+        res.status(201).json({massage:"Logout Sucessfully"});
+    } catch (err) {
+        return res.status(401).json({error:err.message});
+    }
     res.send("Logout Done");
     console.log("Logout Done");
 }
