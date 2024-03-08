@@ -35,4 +35,24 @@ const sendMessage = async(req,res)=>{
     }
 }
 
-export default sendMessage;
+const getMessage = async(req,res)=>{
+    try {
+        const{id} = req.params;
+        const senderId = req.user._id;
+
+        const con= await Conversation.findOne({
+            participants:{$all:[senderId,id]}
+        }).populate("messages");
+
+        if(!con){
+            res.status(200).json([]);
+        }
+
+        const message= con.messages;
+        res.status(201).json(message);
+    } catch (error) {
+        res.status(401).json({error:error});
+    }
+}
+
+export  {sendMessage, getMessage};
