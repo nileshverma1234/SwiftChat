@@ -1,5 +1,5 @@
 import Conversation from "../models/conversationModel.js";
-
+import Message from '../models/messageModel.js';
 
 const sendMessage = async(req,res)=>{
     try {
@@ -17,6 +17,17 @@ const sendMessage = async(req,res)=>{
             });
         }
 
+        const newMessage = new Message.create({
+            senderId,
+            reciverId:id,
+            message
+        });
+
+        if(newMessage){
+            con.messages.push(newMessage._id);
+        }
+
+        res.status(201).json(newMessage);
         
     } catch (error) {
         res.status(401).json({error:error.message});
