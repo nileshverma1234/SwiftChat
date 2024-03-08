@@ -1,9 +1,11 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/userModel';
+import User from '../models/userModel.js';
 
 const protect = async (req,res, next)=>{
     try {
-        const token=req.cookie.jwt;
+
+        const token=req.cookies.jwt;
+        
         if(!token){
             res.status(500).json({error:"No token Provided"});
         }

@@ -9,7 +9,7 @@ const conModel= new mongoose.Schema({
     ],
     messages:[
         {
-            type:mongoose.SchemaType.ObjectId,
+            type:mongoose.SchemaTypes.ObjectId,
             ref:"Message",
             default:[]
         }

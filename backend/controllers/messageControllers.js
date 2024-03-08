@@ -17,7 +17,7 @@ const sendMessage = async(req,res)=>{
             });
         }
 
-        const newMessage = new Message.create({
+        const newMessage = await Message.create({
             senderId,
             reciverId:id,
             message
@@ -25,6 +25,7 @@ const sendMessage = async(req,res)=>{
 
         if(newMessage){
             con.messages.push(newMessage._id);
+            await con.save();
         }
 
         res.status(201).json(newMessage);
