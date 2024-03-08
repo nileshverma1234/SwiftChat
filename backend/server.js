@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import connectDB from "./db/connectDB.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 app.use('/api/auth',authRoutes);
 app.use('/api/messages',messageRoutes);
+app.use('/api/users',userRoutes);
 
 // app.get('/', (req,res)=>{
 //     res.send({message: "Server is running fine"});

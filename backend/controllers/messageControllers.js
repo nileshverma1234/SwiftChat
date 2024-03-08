@@ -28,10 +28,10 @@ const sendMessage = async(req,res)=>{
             await con.save();
         }
 
-        res.status(201).json(newMessage);
+        return res.status(201).json(newMessage);
         
     } catch (error) {
-        res.status(401).json({error:error.message});
+        return res.status(401).json({error:error.message});
     }
 }
 
@@ -45,13 +45,13 @@ const getMessage = async(req,res)=>{
         }).populate("messages");
 
         if(!con){
-            res.status(200).json([]);
+            return res.status(200).json([]);
         }
 
         const message= con.messages;
-        res.status(201).json(message);
+        return res.status(201).json(message);
     } catch (error) {
-        res.status(401).json({error:error});
+        return res.status(401).json({error:error});
     }
 }
 
