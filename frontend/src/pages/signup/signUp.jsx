@@ -87,6 +87,14 @@ const signUp = () => {
 
           {/* Gender check box */}
           {/* <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} /> */}
+
+          {/* Image selection part */}
+          {/* <div>
+            <label className='label'>
+						  <span className='text-base label-text'>Upload profile pic :-</span>
+					  </label>
+
+          </div> */}
           {/* Already have account */}
 
           {/* Signup Button */}
