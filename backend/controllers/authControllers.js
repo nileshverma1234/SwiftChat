@@ -112,13 +112,12 @@ const loginUser = async (req,res)=>{
 
 const logoutUser = (req,res)=>{
     try {
-        res.cookie("jwt","",{maxAge:0});
-        res.status(201).json({massage:"Logout Sucessfully"});
-    } catch (err) {
-        return res.status(401).json({error:err.message});
-    }
-    res.send("Logout Done");
-    console.log("Logout Done");
+		res.cookie("jwt", "", { maxAge: 0 });
+		res.status(200).json({ message: "Logged out successfully" });
+	} catch (error) {
+		console.log("Error in logout controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
 }
 
 export {loginUser, signupUser, logoutUser} ;
