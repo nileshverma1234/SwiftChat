@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import useSignup from '../../hooks/useSignup';
 
-const signUp = () => {
+const SignUp = () => {
 
   const [inputs, setInputs] = useState({
 		fullName: "",
@@ -151,4 +151,4 @@ const signUp = () => {
   )
 }
 
-export default signUp
+export default SignUp;
