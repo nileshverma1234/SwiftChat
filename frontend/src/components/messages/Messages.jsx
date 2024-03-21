@@ -1,9 +1,9 @@
-import React from 'react';
 import Message from './Message';
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import useListenMessages from '../../hooks/useListenMessages';
 import { useRef ,useEffect} from 'react';
+
 const Messages = () => {
   const { messages, loading } = useGetMessages();
   useListenMessages();
@@ -30,7 +30,7 @@ const Messages = () => {
 				<p className='text-center'>Send a message to start the conversation</p>
 			)}
  	  </div>
-  )
-}
+  );
+};
 
 export default Messages;
